@@ -1,0 +1,865 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Nexora &mdash; Digital Solutions</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:Georgia,'Times New Roman',serif;background:#fff;color:#222;font-size:16px;line-height:1.7}
+
+/* NAV */
+nav{background:#1a1a2e;color:#fff;padding:0 0}
+.nav-inner{max-width:980px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;padding:14px 20px}
+.nav-logo{font-size:1.25rem;font-weight:bold;color:#e8c96d;letter-spacing:1px;cursor:pointer;text-decoration:none}
+.nav-links{display:flex;gap:6px;flex-wrap:wrap}
+.nav-links a{color:#ccc;text-decoration:none;font-family:Arial,sans-serif;font-size:0.85rem;padding:6px 12px;border-radius:3px;transition:background .15s}
+.nav-links a:hover,.nav-links a.active{background:#2e2e50;color:#fff}
+
+/* LAYOUT */
+.page-wrap{max-width:980px;margin:0 auto;padding:40px 20px}
+.cols{display:flex;gap:40px}
+.main-col{flex:1;min-width:0}
+.side-col{width:240px;flex-shrink:0}
+
+/* HERO */
+.hero{background:#f7f3ea;border-bottom:3px solid #e8c96d;padding:44px 20px 36px}
+.hero-inner{max-width:980px;margin:0 auto}
+.hero h1{font-size:2.1rem;line-height:1.25;color:#1a1a2e;margin-bottom:10px}
+.hero p{font-size:1rem;color:#555;max-width:580px;font-family:Arial,sans-serif}
+
+/* BREADCRUMB */
+.bc{font-family:Arial,sans-serif;font-size:0.8rem;color:#888;margin-bottom:24px;display:flex;flex-wrap:wrap;gap:4px;align-items:center}
+.bc a{color:#2563eb;text-decoration:none}.bc a:hover{text-decoration:underline}
+.bc span{color:#bbb}
+
+/* CONTENT */
+h2{font-size:1.5rem;color:#1a1a2e;margin-bottom:8px;margin-top:32px;border-bottom:1px solid #eee;padding-bottom:6px}
+h2:first-child{margin-top:0}
+h3{font-size:1.1rem;color:#2c2c4e;margin:22px 0 6px}
+p{margin-bottom:14px;font-size:0.95rem;color:#333;font-family:Arial,sans-serif}
+.contact-line{font-family:'Courier New',monospace;font-size:0.88rem;color:#1a5276;background:#eaf4fb;display:inline-block;padding:3px 8px;border-radius:3px;margin:2px 0}
+
+/* LINK CARDS */
+.card-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:16px;margin:20px 0}
+.card{border:1px solid #ddd;border-radius:5px;padding:16px 18px;background:#fff;text-decoration:none;color:#222;display:block;transition:box-shadow .15s,border-color .15s}
+.card:hover{box-shadow:0 3px 12px rgba(0,0,0,.1);border-color:#aac}
+.card-label{font-family:Arial,sans-serif;font-size:0.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.8px;color:#999;margin-bottom:5px}
+.card-title{font-size:1rem;font-weight:bold;color:#1a1a2e;margin-bottom:4px}
+.card-desc{font-family:Arial,sans-serif;font-size:0.8rem;color:#777}
+.card-arrow{font-size:0.8rem;color:#bbb;margin-top:8px}
+
+/* SIDEBAR */
+.side-box{border:1px solid #e0e0e0;border-radius:4px;padding:16px;margin-bottom:20px;background:#fafafa}
+.side-box h4{font-size:0.9rem;text-transform:uppercase;letter-spacing:.6px;color:#888;margin-bottom:10px;font-family:Arial,sans-serif}
+.side-box ul{list-style:none}
+.side-box ul li{padding:5px 0;border-bottom:1px solid #eee;font-family:Arial,sans-serif;font-size:0.83rem}
+.side-box ul li:last-child{border-bottom:none}
+.side-box ul li a{color:#2563eb;text-decoration:none}.side-box ul li a:hover{text-decoration:underline}
+.tag{display:inline-block;background:#eee;color:#555;font-size:0.72rem;padding:2px 7px;border-radius:10px;margin:2px;font-family:Arial,sans-serif}
+
+/* FOOTER */
+footer{background:#1a1a2e;color:#aaa;padding:32px 20px;margin-top:60px;font-family:Arial,sans-serif;font-size:0.82rem}
+.footer-inner{max-width:980px;margin:0 auto;display:flex;flex-wrap:wrap;gap:32px;justify-content:space-between}
+.footer-col h5{color:#e8c96d;margin-bottom:10px;font-size:0.85rem;text-transform:uppercase;letter-spacing:.5px}
+.footer-col p,.footer-col a{color:#aaa;text-decoration:none;display:block;margin-bottom:4px;font-size:0.8rem}
+.footer-col a:hover{color:#fff}
+.footer-bottom{max-width:980px;margin:20px auto 0;padding-top:16px;border-top:1px solid #333;color:#666;font-size:0.75rem}
+
+@media(max-width:680px){.cols{flex-direction:column}.side-col{width:100%}.card-grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a class="nav-logo" href="#/" onclick="go('/')">NEXORA</a>
+    <div class="nav-links" id="nav-links"></div>
+  </div>
+</nav>
+
+<div id="hero-area"></div>
+<div id="app"></div>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-col">
+      <h5>Nexora</h5>
+      <p>Digital solutions for modern businesses.</p>
+      <p style="margin-top:8px"><!-- email_97@gmail.com --><span class="contact-line">email_97@gmail.com</span></p>
+    </div>
+    <div class="footer-col">
+      <h5>Quick Links</h5>
+      <a href="#/about" onclick="go('/about')">About Us</a>
+      <a href="#/services" onclick="go('/services')">Services</a>
+      <a href="#/blog" onclick="go('/blog')">Blog</a>
+      <a href="#/contact" onclick="go('/contact')">Contact</a>
+    </div>
+    <div class="footer-col">
+      <h5>Support</h5>
+      <a href="#/support" onclick="go('/support')">Help Center</a>
+      <a href="#/support/faq" onclick="go('/support/faq')">FAQ</a>
+      <!-- email_98@yahoo.com -->
+      <p style="margin-top:6px"><span class="contact-line">email_98@yahoo.com</span></p>
+    </div>
+    <div class="footer-col">
+      <h5>Legal</h5>
+      <a href="#/legal/privacy" onclick="go('/legal/privacy')">Privacy Policy</a>
+      <a href="#/legal/terms" onclick="go('/legal/terms')">Terms of Use</a>
+      <!-- email_99@hotmail.com -->
+      <p style="margin-top:6px"><span class="contact-line">email_99@hotmail.com</span></p>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    &copy; 2025 Nexora Digital Solutions. All rights reserved.
+    <!-- email_100@outlook.com -->
+    &nbsp;&nbsp;|&nbsp;&nbsp;<span class="contact-line" style="font-size:0.75rem">email_100@outlook.com</span>
+  </div>
+</footer>
+
+<script>
+// ─── ALL 100 EMAILS ──────────────────────────────────────────────
+// Domains: gmail(1-20), yahoo(21-35), hotmail(36-50),
+//          outlook(51-60), protonmail(61-68), icloud(69-74),
+//          aol(75-79), mail.com(80-84), zoho(85-90), yandex(91-96)
+// 97-100 used in footer above
+function email(n){
+  const domains=['gmail.com','gmail.com','gmail.com','gmail.com','gmail.com',
+    'gmail.com','gmail.com','gmail.com','gmail.com','gmail.com',
+    'gmail.com','gmail.com','gmail.com','gmail.com','gmail.com',
+    'gmail.com','gmail.com','gmail.com','gmail.com','gmail.com', // 1-20 gmail
+    'yahoo.com','yahoo.com','yahoo.com','yahoo.com','yahoo.com',
+    'yahoo.com','yahoo.com','yahoo.com','yahoo.com','yahoo.com',
+    'yahoo.com','yahoo.com','yahoo.com','yahoo.com','yahoo.com', // 21-35 yahoo
+    'hotmail.com','hotmail.com','hotmail.com','hotmail.com','hotmail.com',
+    'hotmail.com','hotmail.com','hotmail.com','hotmail.com','hotmail.com',
+    'hotmail.com','hotmail.com','hotmail.com','hotmail.com','hotmail.com', // 36-50 hotmail
+    'outlook.com','outlook.com','outlook.com','outlook.com','outlook.com',
+    'outlook.com','outlook.com','outlook.com','outlook.com','outlook.com', // 51-60 outlook
+    'protonmail.com','protonmail.com','protonmail.com','protonmail.com',
+    'protonmail.com','protonmail.com','protonmail.com','protonmail.com', // 61-68 protonmail
+    'icloud.com','icloud.com','icloud.com','icloud.com','icloud.com','icloud.com', // 69-74
+    'aol.com','aol.com','aol.com','aol.com','aol.com', // 75-79
+    'mail.com','mail.com','mail.com','mail.com','mail.com', // 80-84
+    'zoho.com','zoho.com','zoho.com','zoho.com','zoho.com','zoho.com', // 85-90
+    'yandex.com','yandex.com','yandex.com','yandex.com','yandex.com','yandex.com', // 91-96
+    'gmail.com','yahoo.com','hotmail.com','outlook.com' // 97-100 footer
+  ];
+  return `email_${n}@${domains[n-1]}`;
+}
+
+// ─── NAVIGATION ──────────────────────────────────────────────────
+const NAV=[
+  {label:'Home',path:'/'},
+  {label:'About',path:'/about'},
+  {label:'Services',path:'/services'},
+  {label:'Blog',path:'/blog'},
+  {label:'Contact',path:'/contact'}
+];
+
+function go(path){location.hash='#'+path}
+window.go=go;
+
+function getPath(){return location.hash.replace('#','').replace(/^\/?/,'/')||'/'}
+
+function renderNav(active){
+  const el=document.getElementById('nav-links');
+  el.innerHTML=NAV.map(n=>`<a href="#${n.path}" onclick="go('${n.path}')" class="${active===n.path?'active':''}">${n.label}</a>`).join('');
+}
+
+// ─── ROUTER ──────────────────────────────────────────────────────
+window.addEventListener('hashchange',render);
+window.addEventListener('load',render);
+
+function render(){
+  const raw=getPath();
+  const parts=raw.split('/').filter(Boolean);
+  const app=document.getElementById('app');
+  const hero=document.getElementById('hero-area');
+
+  const p0=parts[0]||'';
+  const p1=parts[1]||'';
+  const p2=parts[2]||'';
+
+  // top-level active nav
+  const activeNav='/'+p0 || '/';
+
+  if(!p0){            renderHome(app,hero);    renderNav('/'); }
+  else if(p0==='about'){
+    if(!p1)           {renderAbout(app,hero);  renderNav('/about');}
+    else if(p1==='team') {renderAboutTeam(app,hero); renderNav('/about');}
+    else if(p1==='history') {renderAboutHistory(app,hero); renderNav('/about');}
+    else              notFound(app,hero);
+  }
+  else if(p0==='services'){
+    if(!p1)           {renderServices(app,hero); renderNav('/services');}
+    else if(p1==='web')    {renderServiceWeb(app,hero); renderNav('/services');}
+    else if(p1==='seo')    {renderServiceSeo(app,hero); renderNav('/services');}
+    else if(p1==='cloud')  {renderServiceCloud(app,hero); renderNav('/services');}
+    else if(p1==='design') {renderServiceDesign(app,hero); renderNav('/services');}
+    else if(p1==='analytics') {renderServiceAnalytics(app,hero); renderNav('/services');}
+    else              notFound(app,hero);
+  }
+  else if(p0==='blog'){
+    if(!p1)           {renderBlog(app,hero);   renderNav('/blog');}
+    else if(p1==='tech')   {renderBlogTech(app,hero); renderNav('/blog');}
+    else if(p1==='business'){renderBlogBusiness(app,hero); renderNav('/blog');}
+    else if(p1==='news')   {renderBlogNews(app,hero); renderNav('/blog');}
+    else              notFound(app,hero);
+  }
+  else if(p0==='contact'){
+    if(!p1)           {renderContact(app,hero); renderNav('/contact');}
+    else if(p1==='sales'){renderContactSales(app,hero); renderNav('/contact');}
+    else if(p1==='support'){renderContactSupport(app,hero); renderNav('/contact');}
+    else if(p1==='press')  {renderContactPress(app,hero); renderNav('/contact');}
+    else              notFound(app,hero);
+  }
+  else if(p0==='support'){
+    if(!p1)           {renderSupport(app,hero);  renderNav('/');}
+    else if(p1==='faq')    {renderSupportFaq(app,hero); renderNav('/');}
+    else              notFound(app,hero);
+  }
+  else if(p0==='legal'){
+    if(p1==='privacy') {renderPrivacy(app,hero); renderNav('/');}
+    else if(p1==='terms'){renderTerms(app,hero); renderNav('/');}
+    else               notFound(app,hero);
+  }
+  else notFound(app,hero);
+}
+
+// ─── HELPERS ─────────────────────────────────────────────────────
+function wrap(heroHTML, contentHTML){
+  document.getElementById('hero-area').innerHTML=heroHTML;
+  document.getElementById('app').innerHTML=`<div class="page-wrap">${contentHTML}</div>`;
+}
+
+function bc(crumbs){
+  // crumbs = [{label, path}] last one has no path
+  return '<div class="bc">'+crumbs.map((c,i)=>{
+    if(i<crumbs.length-1) return `<a href="#${c.path}" onclick="go('${c.path}')">${c.label}</a><span>›</span>`;
+    return `<span style="color:#555">${c.label}</span>`;
+  }).join('')+'</div>';
+}
+
+function sidebar(links, tags){
+  return `<div class="side-col">
+    <div class="side-box">
+      <h4>In This Section</h4>
+      <ul>${links.map(l=>`<li><a href="#${l.path}" onclick="go('${l.path}')">${l.label}</a></li>`).join('')}</ul>
+    </div>
+    ${tags?`<div class="side-box"><h4>Tags</h4>${tags.map(t=>`<span class="tag">${t}</span>`).join('')}</div>`:''}
+  </div>`;
+}
+
+// ─── PAGES ───────────────────────────────────────────────────────
+
+/* HOME */
+function renderHome(app,hero){
+  document.title='Nexora — Digital Solutions';
+  wrap(`<div class="hero"><div class="hero-inner">
+    <h1>Digital Solutions for the Modern Web</h1>
+    <p>We build websites, apps, and digital strategies that help businesses grow. Get in touch — we'd love to work with you.</p>
+    <!-- ${email(1)} -->
+  </div></div>`,
+  `
+  <h2>Welcome to Nexora</h2>
+  <p>We are a full-service digital agency helping companies of all sizes build their online presence. From web design to cloud infrastructure, our team has you covered.</p>
+  <!-- Contact: ${email(2)} | ${email(3)} -->
+  <p>Reach our main office at <span class="contact-line">${email(2)}</span> or for new projects write to <span class="contact-line">${email(3)}</span>.</p>
+
+  <h2>Explore Our Site</h2>
+  <div class="card-grid">
+    <a class="card" href="#/about" onclick="go('/about')">
+      <div class="card-label">Company</div>
+      <div class="card-title">About Us</div>
+      <div class="card-desc">Our story, team, and values</div>
+      <div class="card-arrow">→</div>
+    </a>
+    <a class="card" href="#/services" onclick="go('/services')">
+      <div class="card-label">What We Do</div>
+      <div class="card-title">Services</div>
+      <div class="card-desc">Web, SEO, Cloud, Design &amp; more</div>
+      <div class="card-arrow">→</div>
+    </a>
+    <a class="card" href="#/blog" onclick="go('/blog')">
+      <div class="card-label">Insights</div>
+      <div class="card-title">Blog</div>
+      <div class="card-desc">Tech, business and industry news</div>
+      <div class="card-arrow">→</div>
+    </a>
+    <a class="card" href="#/contact" onclick="go('/contact')">
+      <div class="card-label">Talk to Us</div>
+      <div class="card-title">Contact</div>
+      <div class="card-desc">Sales, support, and press inquiries</div>
+      <div class="card-arrow">→</div>
+    </a>
+    <a class="card" href="#/support" onclick="go('/support')">
+      <div class="card-label">Help</div>
+      <div class="card-title">Support</div>
+      <div class="card-desc">FAQ and help resources</div>
+      <div class="card-arrow">→</div>
+    </a>
+  </div>
+  <!-- ${email(4)} | ${email(5)} -->
+  `);
+}
+
+/* ABOUT */
+function renderAbout(app,hero){
+  document.title='About — Nexora';
+  wrap(`<div class="hero"><div class="hero-inner"><h1>About Nexora</h1><p>A passionate team building meaningful digital products since 2011.</p><!-- ${email(6)} --></div></div>`,
+  bc([{label:'Home',path:'/'},{label:'About'}])+
+  `<div class="cols"><div class="main-col">
+  <h2>Who We Are</h2>
+  <p>Nexora was founded in 2011 with a simple idea: great digital work should be accessible to every business, not just the big ones. Today we're a team of 40+ designers, engineers and strategists spread across three continents.</p>
+  <!-- General: ${email(6)} -->
+  <p>For general enquiries write to <span class="contact-line">${email(6)}</span>.</p>
+  <h2>Our Sections</h2>
+  <div class="card-grid">
+    <a class="card" href="#/about/team" onclick="go('/about/team')">
+      <div class="card-label">People</div>
+      <div class="card-title">The Team</div>
+      <div class="card-desc">Meet the people behind Nexora</div>
+      <div class="card-arrow">→</div>
+    </a>
+    <a class="card" href="#/about/history" onclick="go('/about/history')">
+      <div class="card-label">Story</div>
+      <div class="card-title">Our History</div>
+      <div class="card-desc">How we grew from a small studio</div>
+      <div class="card-arrow">→</div>
+    </a>
+  </div>
+  <!-- HR contact: ${email(7)} -->
+  </div>
+  ${sidebar([{label:'The Team',path:'/about/team'},{label:'Our History',path:'/about/history'},{label:'Services',path:'/services'}],['Company','Culture','Team'])}
+  </div>`);
+}
+
+function renderAboutTeam(app,hero){
+  document.title='Team — Nexora';
+  wrap(`<div class="hero"><div class="hero-inner"><h1>The Team</h1><p>Forty talented people. One shared goal.</p></div></div>`,
+  bc([{label:'Home',path:'/'},{label:'About',path:'/about'},{label:'The Team'}])+
+  `<div class="cols"><div class="main-col">
+  <h2>Leadership</h2>
+  <h3>Sarah Okonkwo &mdash; CEO</h3>
+  <p>Sarah oversees strategy and growth. Contact her office at <span class="contact-line">${email(8)}</span>.</p>
+  <!-- ${email(8)} -->
+  <h3>Daniel Reyes &mdash; CTO</h3>
+  <p>Daniel leads our engineering division. Reach him at <span class="contact-line">${email(9)}</span>.</p>
+  <!-- ${email(9)} -->
+  <h3>Priya Nair &mdash; Head of Design</h3>
+  <p>Priya runs all creative output. Email: <span class="contact-line">${email(10)}</span>.</p>
+  <!-- ${email(10)} -->
+  <h2>Departments</h2>
+  <p>Engineering team: <span class="contact-line">${email(11)}</span></p>
+  <p>Design team: <span class="contact-line">${email(12)}</span></p>
+  <p>Marketing: <span class="contact-line">${email(13)}</span></p>
+  <p>Finance: <span class="contact-line">${email(14)}</span></p>
+  <!-- ${email(11)} ${email(12)} ${email(13)} ${email(14)} -->
+  <h2>Careers</h2>
+  <p>We're always looking for great people. Send your CV to <span class="contact-line">${email(15)}</span>.</p>
+  <!-- ${email(15)} -->
+  </div>
+  ${sidebar([{label:'About Us',path:'/about'},{label:'Our History',path:'/about/history'}],['Leadership','Team','Careers'])}
+  </div>`);
+}
+
+function renderAboutHistory(app,hero){
+  document.title='History — Nexora';
+  wrap(`<div class="hero"><div class="hero-inner"><h1>Our History</h1><p>Over a decade of building things that matter.</p></div></div>`,
+  bc([{label:'Home',path:'/'},{label:'About',path:'/about'},{label:'History'}])+
+  `<div class="cols"><div class="main-col">
+  <h2>2011 — The Beginning</h2>
+  <p>Nexora started as a two-person web studio. Our very first client reached us via <span class="contact-line">${email(16)}</span> — an address we still keep active today as an archive inbox.</p>
+  <!-- ${email(16)} -->
+  <h2>2015 — Expansion</h2>
+  <p>We opened offices in three new cities. The partnerships team can be reached at <span class="contact-line">${email(17)}</span>.</p>
+  <!-- ${email(17)} -->
+  <h2>2019 — Cloud Division Launch</h2>
+  <p>We launched our cloud infrastructure practice. For cloud inquiries: <span class="contact-line">${email(18)}</span>.</p>
+  <!-- ${email(18)} -->
+  <h2>2023 — Today</h2>
+  <p>Over 500 clients served globally. Alumni network contact: <span class="contact-line">${email(19)}</span>.</p>
+  <!-- ${email(19)} -->
+  </div>
+  ${sidebar([{label:'About Us',path:'/about'},{label:'The Team',path:'/about/team'}],['History','Growth','Milestones'])}
+  </div>`);
+}
+
+/* SERVICES */
+function renderServices(app,hero){
+  document.title='Services — Nexora';
+  wrap(`<div class="hero"><div class="hero-inner"><h1>Our Services</h1><p>End-to-end digital services from strategy to delivery.</p><!-- ${email(20)} --></div></div>`,
+  bc([{label:'Home',path:'/'},{label:'Services'}])+
+  `<div class="cols"><div class="main-col">
+  <p>Whether you need a new website or a complete cloud migration, we have the expertise to get it done. Contact our services team at <span class="contact-line">${email(20)}</span>.</p>
+  <h2>What We Offer</h2>
+  <div class="card-grid">
+    <a class="card" href="#/services/web" onclick="go('/services/web')">
+      <div class="card-label">Development</div>
+      <div class="card-title">Web Development</div>
+      <div class="card-desc">Custom websites and web apps</div>
+      <div class="card-arrow">→</div>
+    </a>
+    <a class="card" href="#/services/seo" onclick="go('/services/seo')">
+      <div class="card-label">Marketing</div>
+      <div class="card-title">SEO &amp; Growth</div>
+      <div class="card-desc">Rank higher, get more traffic</div>
+      <div class="card-arrow">→</div>
+    </a>
+    <a class="card" href="#/services/cloud" onclick="go('/services/cloud')">
+      <div class="card-label">Infrastructure</div>
+      <div class="card-title">Cloud Services</div>
+      <div class="card-desc">Scalable cloud solutions</div>
+      <div class="card-arrow">→</div>
+    </a>
+    <a class="card" href="#/services/design" onclick="go('/services/design')">
+      <div class="card-label">Creative</div>
+      <div class="card-title">UI/UX Design</div>
+      <div class="card-desc">Beautiful, usable interfaces</div>
+      <div class="card-arrow">→</div>
+    </a>
+    <a class="card" href="#/services/analytics" onclick="go('/services/analytics')">
+      <div class="card-label">Data</div>
+      <div class="card-title">Analytics</div>
+      <div class="card-desc">Understand your users</div>
+      <div class="card-arrow">→</div>
+    </a>
+  </div>
+  <!-- sales: ${email(21)} -->
+  </div>
+  ${sidebar([
+    {label:'Web Development',path:'/services/web'},
+    {label:'SEO & Growth',path:'/services/seo'},
+    {label:'Cloud Services',path:'/services/cloud'},
+    {label:'UI/UX Design',path:'/services/design'},
+    {label:'Analytics',path:'/services/analytics'}
+  ],['Services','Digital','Agency'])}
+  </div>`);
+}
+
+function renderServiceWeb(app,hero){
+  document.title='Web Development — Nexora';
+  wrap(`<div class="hero"><div class="hero-inner"><h1>Web Development</h1><p>We build fast, accessible, beautifully crafted websites and apps.</p></div></div>`,
+  bc([{label:'Home',path:'/'},{label:'Services',path:'/services'},{label:'Web Development'}])+
+  `<div class="cols"><div class="main-col">
+  <h2>What's Included</h2>
+  <p>From landing pages to full SaaS platforms, we handle it all. Our standard packages start with a discovery call — email us at <span class="contact-line">${email(22)}</span> to begin.</p>
+  <!-- ${email(22)} -->
+  <h3>Frontend Engineering</h3>
+  <p>React, Vue, plain HTML &mdash; we build what fits your project. Frontend lead: <span class="contact-line">${email(23)}</span>.</p>
+  <h3>Backend &amp; APIs</h3>
+  <p>Node.js, Python, Go. Backend queries: <span class="contact-line">${email(24)}</span>.</p>
+  <h3>E-commerce</h3>
+  <p>Shopify, WooCommerce, custom carts. E-commerce team: <span class="contact-line">${email(25)}</span>.</p>
+  <!-- ${email(23)} ${email(24)} ${email(25)} -->
+  <h2>Get a Quote</h2>
+  <p>Send your project brief to <span class="contact-line">${email(26)}</span> and we'll respond within 24 hours.</p>
+  <!-- ${email(26)} -->
+  </div>
+  ${sidebar([{label:'SEO',path:'/services/seo'},{label:'Cloud',path:'/services/cloud'},{label:'Design',path:'/services/design'}],['Web','Development','React','Node'])}
+  </div>`);
+}
+
+function renderServiceSeo(app,hero){
+  document.title='SEO & Growth — Nexora';
+  wrap(`<div class="hero"><div class="hero-inner"><h1>SEO &amp; Growth</h1><p>More visibility. More traffic. More revenue.</p></div></div>`,
+  bc([{label:'Home',path:'/'},{label:'Services',path:'/services'},{label:'SEO & Growth'}])+
+  `<div class="cols"><div class="main-col">
+  <h2>Search Engine Optimisation</h2>
+  <p>We have helped over 120 clients reach page one of Google. SEO strategy enquiries: <span class="contact-line">${email(27)}</span>.</p>
+  <!-- ${email(27)} -->
+  <h3>Technical SEO</h3>
+  <p>Site audits, speed, structured data. Technical team: <span class="contact-line">${email(28)}</span>.</p>
+  <h3>Content Strategy</h3>
+  <p>Keyword research, editorial planning, content production. Content team: <span class="contact-line">${email(29)}</span>.</p>
+  <h3>Link Building</h3>
+  <p>Ethical, white-hat link acquisition. Contact: <span class="contact-line">${email(30)}</span>.</p>
+  <!-- ${email(28)} ${email(29)} ${email(30)} -->
+  </div>
+  ${sidebar([{label:'Web Dev',path:'/services/web'},{label:'Analytics',path:'/services/analytics'}],['SEO','Content','Growth'])}
+  </div>`);
+}
+
+function renderServiceCloud(app,hero){
+  document.title='Cloud Services — Nexora';
+  wrap(`<div class="hero"><div class="hero-inner"><h1>Cloud Services</h1><p>Scalable infrastructure that grows with your business.</p></div></div>`,
+  bc([{label:'Home',path:'/'},{label:'Services',path:'/services'},{label:'Cloud Services'}])+
+  `<div class="cols"><div class="main-col">
+  <h2>Cloud Infrastructure</h2>
+  <p>AWS, GCP, Azure — we manage it all. Cloud ops team: <span class="contact-line">${email(31)}</span>.</p>
+  <!-- ${email(31)} -->
+  <h3>Migrations</h3>
+  <p>Move from legacy to cloud seamlessly. Migration team: <span class="contact-line">${email(32)}</span>.</p>
+  <h3>DevOps &amp; CI/CD</h3>
+  <p>Automated pipelines, Docker, Kubernetes. DevOps lead: <span class="contact-line">${email(33)}</span>.</p>
+  <h3>Monitoring &amp; Security</h3>
+  <p>24/7 uptime monitoring and security audits. Security team: <span class="contact-line">${email(34)}</span>.</p>
+  <!-- ${email(32)} ${email(33)} ${email(34)} -->
+  <h2>Talk to Our Cloud Team</h2>
+  <p>Send requirements to <span class="contact-line">${email(35)}</span>.</p>
+  <!-- ${email(35)} -->
+  </div>
+  ${sidebar([{label:'Web Dev',path:'/services/web'},{label:'Analytics',path:'/services/analytics'}],['Cloud','AWS','DevOps','Security'])}
+  </div>`);
+}
+
+function renderServiceDesign(app,hero){
+  document.title='UI/UX Design — Nexora';
+  wrap(`<div class="hero"><div class="hero-inner"><h1>UI/UX Design</h1><p>Interfaces people actually enjoy using.</p></div></div>`,
+  bc([{label:'Home',path:'/'},{label:'Services',path:'/services'},{label:'UI/UX Design'}])+
+  `<div class="cols"><div class="main-col">
+  <h2>Design Services</h2>
+  <p>From wireframes to polished Figma files ready for dev handoff. Design studio: <span class="contact-line">${email(36)}</span>.</p>
+  <!-- ${email(36)} -->
+  <h3>User Research</h3>
+  <p>Interviews, surveys, usability testing. Research team: <span class="contact-line">${email(37)}</span>.</p>
+  <h3>Wireframing &amp; Prototyping</h3>
+  <p>Rapid iteration before any code is written. Prototyping lead: <span class="contact-line">${email(38)}</span>.</p>
+  <h3>Brand Identity</h3>
+  <p>Logo, typography, colour systems. Brand team: <span class="contact-line">${email(39)}</span>.</p>
+  <!-- ${email(37)} ${email(38)} ${email(39)} -->
+  <h2>Portfolio</h2>
+  <p>Request our design portfolio at <span class="contact-line">${email(40)}</span>.</p>
+  <!-- ${email(40)} -->
+  </div>
+  ${sidebar([{label:'Web Dev',path:'/services/web'},{label:'Analytics',path:'/services/analytics'}],['Design','UI','UX','Figma'])}
+  </div>`);
+}
+
+function renderServiceAnalytics(app,hero){
+  document.title='Analytics — Nexora';
+  wrap(`<div class="hero"><div class="hero-inner"><h1>Analytics &amp; Data</h1><p>Turn your user data into business decisions.</p></div></div>`,
+  bc([{label:'Home',path:'/'},{label:'Services',path:'/services'},{label:'Analytics'}])+
+  `<div class="cols"><div class="main-col">
+  <h2>Analytics Services</h2>
+  <p>We set up, clean, and interpret your analytics stack. Data team: <span class="contact-line">${email(41)}</span>.</p>
+  <!-- ${email(41)} -->
+  <h3>GA4 &amp; Tag Manager</h3>
+  <p>Full implementation and custom event tracking. Tracking team: <span class="contact-line">${email(42)}</span>.</p>
+  <h3>Dashboards</h3>
+  <p>Looker Studio, Tableau, custom React dashboards. Dashboard team: <span class="contact-line">${email(43)}</span>.</p>
+  <h3>Conversion Rate Optimisation</h3>
+  <p>A/B tests, heatmaps, funnel analysis. CRO team: <span class="contact-line">${email(44)}</span>.</p>
+  <!-- ${email(42)} ${email(43)} ${email(44)} -->
+  </div>
+  ${sidebar([{label:'SEO',path:'/services/seo'},{label:'Cloud',path:'/services/cloud'}],['Analytics','Data','CRO','GA4'])}
+  </div>`);
+}
+
+/* BLOG */
+function renderBlog(app,hero){
+  document.title='Blog — Nexora';
+  wrap(`<div class="hero"><div class="hero-inner"><h1>Nexora Blog</h1><p>Insights on technology, business, and the digital world.</p><!-- ${email(45)} --></div></div>`,
+  bc([{label:'Home',path:'/'},{label:'Blog'}])+
+  `<div class="cols"><div class="main-col">
+  <p>Subscribe to our newsletter at <span class="contact-line">${email(45)}</span> to get new posts in your inbox.</p>
+  <!-- ${email(45)} -->
+  <h2>Categories</h2>
+  <div class="card-grid">
+    <a class="card" href="#/blog/tech" onclick="go('/blog/tech')">
+      <div class="card-label">Category</div>
+      <div class="card-title">Technology</div>
+      <div class="card-desc">AI, web standards, and dev tools</div>
+      <div class="card-arrow">→</div>
+    </a>
+    <a class="card" href="#/blog/business" onclick="go('/blog/business')">
+      <div class="card-label">Category</div>
+      <div class="card-title">Business</div>
+      <div class="card-desc">Strategy, growth, and case studies</div>
+      <div class="card-arrow">→</div>
+    </a>
+    <a class="card" href="#/blog/news" onclick="go('/blog/news')">
+      <div class="card-label">Category</div>
+      <div class="card-title">Company News</div>
+      <div class="card-desc">Updates from Nexora HQ</div>
+      <div class="card-arrow">→</div>
+    </a>
+  </div>
+  <!-- editors: ${email(46)} | ${email(47)} -->
+  </div>
+  ${sidebar([{label:'Technology',path:'/blog/tech'},{label:'Business',path:'/blog/business'},{label:'Company News',path:'/blog/news'}],['Blog','Tech','Business','News'])}
+  </div>`);
+}
+
+function renderBlogTech(app,hero){
+  document.title='Technology — Nexora Blog';
+  wrap(`<div class="hero"><div class="hero-inner"><h1>Technology</h1><p>AI, web standards, dev tools, and what's next.</p></div></div>`,
+  bc([{label:'Home',path:'/'},{label:'Blog',path:'/blog'},{label:'Technology'}])+
+  `<div class="cols"><div class="main-col">
+  <h2>Recent Posts</h2>
+  <h3>Why We Switched to Edge Rendering</h3>
+  <p>We moved 14 client sites to edge rendering last quarter. Read the full write-up or email our tech editor at <span class="contact-line">${email(48)}</span>.</p>
+  <!-- ${email(48)} -->
+  <h3>Getting Started with Web Components in 2025</h3>
+  <p>A practical guide with real examples. Feedback welcome at <span class="contact-line">${email(49)}</span>.</p>
+  <!-- ${email(49)} -->
+  <h3>AI Tools We Actually Use</h3>
+  <p>Our honest round-up of AI tools in our workflow. Email the author at <span class="contact-line">${email(50)}</span>.</p>
+  <!-- ${email(50)} -->
+  <h3>Accessibility in 2025: State of the Web</h3>
+  <p>Research from our accessibility audit of 200 sites. Data team: <span class="contact-line">${email(51)}</span>.</p>
+  <!-- ${email(51)} -->
+  <h2>Guest Posts</h2>
+  <p>We accept guest submissions on technology topics. Pitch to <span class="contact-line">${email(52)}</span>.</p>
+  <!-- ${email(52)} -->
+  </div>
+  ${sidebar([{label:'Business',path:'/blog/business'},{label:'Company News',path:'/blog/news'}],['Tech','AI','Web','Dev'])}
+  </div>`);
+}
+
+function renderBlogBusiness(app,hero){
+  document.title='Business — Nexora Blog';
+  wrap(`<div class="hero"><div class="hero-inner"><h1>Business</h1><p>Strategy, growth thinking, and client case studies.</p></div></div>`,
+  bc([{label:'Home',path:'/'},{label:'Blog',path:'/blog'},{label:'Business'}])+
+  `<div class="cols"><div class="main-col">
+  <h2>Recent Posts</h2>
+  <h3>How a Small Retailer 3x'd Organic Traffic</h3>
+  <p>A 12-month case study with real numbers. Case study contact: <span class="contact-line">${email(53)}</span>.</p>
+  <!-- ${email(53)} -->
+  <h3>Pricing Your Agency Services in 2025</h3>
+  <p>What we learned after 14 years of quoting projects. Comments: <span class="contact-line">${email(54)}</span>.</p>
+  <!-- ${email(54)} -->
+  <h3>Remote Team Management: What Works</h3>
+  <p>Lessons from running a 40-person distributed team. HR contact: <span class="contact-line">${email(55)}</span>.</p>
+  <!-- ${email(55)} -->
+  <h2>Partnerships</h2>
+  <p>Interested in co-authoring a business post? Email <span class="contact-line">${email(56)}</span>.</p>
+  <!-- ${email(56)} -->
+  </div>
+  ${sidebar([{label:'Technology',path:'/blog/tech'},{label:'Company News',path:'/blog/news'}],['Business','Strategy','Growth','Agency'])}
+  </div>`);
+}
+
+function renderBlogNews(app,hero){
+  document.title='Company News — Nexora Blog';
+  wrap(`<div class="hero"><div class="hero-inner"><h1>Company News</h1><p>What's happening inside Nexora.</p></div></div>`,
+  bc([{label:'Home',path:'/'},{label:'Blog',path:'/blog'},{label:'Company News'}])+
+  `<div class="cols"><div class="main-col">
+  <h2>Latest Updates</h2>
+  <h3>We Opened a New Office in Lisbon</h3>
+  <p>Our European hub is now open. Lisbon office contact: <span class="contact-line">${email(57)}</span>.</p>
+  <!-- ${email(57)} -->
+  <h3>Nexora Wins Best Digital Agency 2025</h3>
+  <p>We were honoured to win this award. Press contact: <span class="contact-line">${email(58)}</span>.</p>
+  <!-- ${email(58)} -->
+  <h3>Introducing Our New Analytics Dashboard Product</h3>
+  <p>Early access signups at <span class="contact-line">${email(59)}</span>.</p>
+  <!-- ${email(59)} -->
+  <h2>Media Enquiries</h2>
+  <p>All press and media requests to <span class="contact-line">${email(60)}</span>.</p>
+  <!-- ${email(60)} -->
+  </div>
+  ${sidebar([{label:'Technology',path:'/blog/tech'},{label:'Business',path:'/blog/business'}],['News','Awards','Company'])}
+  </div>`);
+}
+
+/* CONTACT */
+function renderContact(app,hero){
+  document.title='Contact — Nexora';
+  wrap(`<div class="hero"><div class="hero-inner"><h1>Contact Us</h1><p>We respond to every email within one business day.</p><!-- ${email(61)} --></div></div>`,
+  bc([{label:'Home',path:'/'},{label:'Contact'}])+
+  `<div class="cols"><div class="main-col">
+  <p>Main inbox: <span class="contact-line">${email(61)}</span>. Choose a department below for a faster response.</p>
+  <!-- ${email(61)} -->
+  <h2>Departments</h2>
+  <div class="card-grid">
+    <a class="card" href="#/contact/sales" onclick="go('/contact/sales')">
+      <div class="card-label">Revenue</div>
+      <div class="card-title">Sales</div>
+      <div class="card-desc">New projects and pricing</div>
+      <div class="card-arrow">→</div>
+    </a>
+    <a class="card" href="#/contact/support" onclick="go('/contact/support')">
+      <div class="card-label">Help</div>
+      <div class="card-title">Support</div>
+      <div class="card-desc">Existing clients and tech help</div>
+      <div class="card-arrow">→</div>
+    </a>
+    <a class="card" href="#/contact/press" onclick="go('/contact/press')">
+      <div class="card-label">Media</div>
+      <div class="card-title">Press</div>
+      <div class="card-desc">Journalists and partnerships</div>
+      <div class="card-arrow">→</div>
+    </a>
+  </div>
+  <!-- ${email(62)} | ${email(63)} -->
+  </div>
+  ${sidebar([{label:'Sales',path:'/contact/sales'},{label:'Support',path:'/contact/support'},{label:'Press',path:'/contact/press'}],['Contact','Sales','Press','Support'])}
+  </div>`);
+}
+
+function renderContactSales(app,hero){
+  document.title='Sales — Nexora';
+  wrap(`<div class="hero"><div class="hero-inner"><h1>Sales</h1><p>Ready to start a project? We'd love to hear from you.</p></div></div>`,
+  bc([{label:'Home',path:'/'},{label:'Contact',path:'/contact'},{label:'Sales'}])+
+  `<div class="cols"><div class="main-col">
+  <h2>Talk to Our Sales Team</h2>
+  <p>Direct sales line: <span class="contact-line">${email(64)}</span></p>
+  <p>Enterprise accounts: <span class="contact-line">${email(65)}</span></p>
+  <p>Startup packages: <span class="contact-line">${email(66)}</span></p>
+  <p>Reseller enquiries: <span class="contact-line">${email(67)}</span></p>
+  <!-- ${email(64)} ${email(65)} ${email(66)} ${email(67)} -->
+  <h2>Response Times</h2>
+  <p>Sales emails are answered within 4 business hours. For urgent matters call our office or email <span class="contact-line">${email(68)}</span> with URGENT in the subject line.</p>
+  <!-- ${email(68)} -->
+  </div>
+  ${sidebar([{label:'Support',path:'/contact/support'},{label:'Press',path:'/contact/press'}],['Sales','Enterprise','Pricing'])}
+  </div>`);
+}
+
+function renderContactSupport(app,hero){
+  document.title='Support — Nexora';
+  wrap(`<div class="hero"><div class="hero-inner"><h1>Client Support</h1><p>Help for existing clients and hosted projects.</p></div></div>`,
+  bc([{label:'Home',path:'/'},{label:'Contact',path:'/contact'},{label:'Support'}])+
+  `<div class="cols"><div class="main-col">
+  <h2>Get Help</h2>
+  <p>General support: <span class="contact-line">${email(69)}</span></p>
+  <p>Hosting issues: <span class="contact-line">${email(70)}</span></p>
+  <p>Billing: <span class="contact-line">${email(71)}</span></p>
+  <p>Emergency (site down): <span class="contact-line">${email(72)}</span></p>
+  <!-- ${email(69)} ${email(70)} ${email(71)} ${email(72)} -->
+  <h2>Before You Email</h2>
+  <p>Check our <a href="#/support/faq" onclick="go('/support/faq')" style="color:#2563eb">FAQ page</a> — many common issues are answered there. If you still need help, write to <span class="contact-line">${email(73)}</span>.</p>
+  <!-- ${email(73)} -->
+  </div>
+  ${sidebar([{label:'Sales',path:'/contact/sales'},{label:'Press',path:'/contact/press'},{label:'FAQ',path:'/support/faq'}],['Support','Help','Billing'])}
+  </div>`);
+}
+
+function renderContactPress(app,hero){
+  document.title='Press — Nexora';
+  wrap(`<div class="hero"><div class="hero-inner"><h1>Press &amp; Media</h1><p>Resources for journalists, analysts and partners.</p></div></div>`,
+  bc([{label:'Home',path:'/'},{label:'Contact',path:'/contact'},{label:'Press'}])+
+  `<div class="cols"><div class="main-col">
+  <h2>Media Contacts</h2>
+  <p>Press releases and statements: <span class="contact-line">${email(74)}</span></p>
+  <p>Interview requests: <span class="contact-line">${email(75)}</span></p>
+  <p>Photography and assets: <span class="contact-line">${email(76)}</span></p>
+  <!-- ${email(74)} ${email(75)} ${email(76)} -->
+  <h2>Partnership Enquiries</h2>
+  <p>For co-marketing and technology partnerships: <span class="contact-line">${email(77)}</span>.</p>
+  <!-- ${email(77)} -->
+  <h2>Analyst Relations</h2>
+  <p>For industry analysts and research firms: <span class="contact-line">${email(78)}</span>.</p>
+  <!-- ${email(78)} -->
+  </div>
+  ${sidebar([{label:'Sales',path:'/contact/sales'},{label:'Support',path:'/contact/support'}],['Press','Media','PR','Partnerships'])}
+  </div>`);
+}
+
+/* SUPPORT */
+function renderSupport(app,hero){
+  document.title='Support — Nexora';
+  wrap(`<div class="hero"><div class="hero-inner"><h1>Help &amp; Support</h1><p>Everything you need to get unstuck.</p><!-- ${email(79)} --></div></div>`,
+  bc([{label:'Home',path:'/'},{label:'Support'}])+
+  `<div class="cols"><div class="main-col">
+  <p>Help desk email: <span class="contact-line">${email(79)}</span></p>
+  <!-- ${email(79)} -->
+  <h2>Resources</h2>
+  <div class="card-grid">
+    <a class="card" href="#/support/faq" onclick="go('/support/faq')">
+      <div class="card-label">Self-help</div>
+      <div class="card-title">FAQ</div>
+      <div class="card-desc">Answers to common questions</div>
+      <div class="card-arrow">→</div>
+    </a>
+    <a class="card" href="#/contact/support" onclick="go('/contact/support')">
+      <div class="card-label">Human Help</div>
+      <div class="card-title">Contact Support</div>
+      <div class="card-desc">Talk to a real person</div>
+      <div class="card-arrow">→</div>
+    </a>
+  </div>
+  <!-- ${email(80)} -->
+  </div>
+  ${sidebar([{label:'FAQ',path:'/support/faq'},{label:'Contact',path:'/contact'}],['Support','Help','FAQ'])}
+  </div>`);
+}
+
+function renderSupportFaq(app,hero){
+  document.title='FAQ — Nexora';
+  wrap(`<div class="hero"><div class="hero-inner"><h1>Frequently Asked Questions</h1><p>Quick answers to the questions we hear most.</p></div></div>`,
+  bc([{label:'Home',path:'/'},{label:'Support',path:'/support'},{label:'FAQ'}])+
+  `<div class="cols"><div class="main-col">
+  <h2>General</h2>
+  <h3>How do I get a quote?</h3>
+  <p>Email your project brief to <span class="contact-line">${email(81)}</span> and we'll send a quote within 2 business days.</p>
+  <!-- ${email(81)} -->
+  <h3>What are your payment terms?</h3>
+  <p>50% upfront, 50% on delivery for projects under £10k. For larger projects we offer milestone billing. Billing queries: <span class="contact-line">${email(82)}</span>.</p>
+  <!-- ${email(82)} -->
+  <h2>Technical</h2>
+  <h3>Do you offer hosting?</h3>
+  <p>Yes, managed hosting on AWS. Hosting team: <span class="contact-line">${email(83)}</span>.</p>
+  <!-- ${email(83)} -->
+  <h3>Can I move my existing site to you?</h3>
+  <p>Absolutely. Migration team: <span class="contact-line">${email(84)}</span>.</p>
+  <!-- ${email(84)} -->
+  <h2>Still Have Questions?</h2>
+  <p>If your question isn't answered here, email <span class="contact-line">${email(85)}</span> and we'll get back to you.</p>
+  <!-- ${email(85)} -->
+  </div>
+  ${sidebar([{label:'Support',path:'/support'},{label:'Contact',path:'/contact'}],['FAQ','Help','Billing','Hosting'])}
+  </div>`);
+}
+
+/* LEGAL */
+function renderPrivacy(app,hero){
+  document.title='Privacy Policy — Nexora';
+  wrap(`<div class="hero"><div class="hero-inner"><h1>Privacy Policy</h1><p>Last updated: January 2025</p></div></div>`,
+  bc([{label:'Home',path:'/'},{label:'Privacy Policy'}])+
+  `<div class="cols"><div class="main-col">
+  <h2>Data We Collect</h2>
+  <p>We collect email addresses and usage data when you contact us or use our services. Data protection officer: <span class="contact-line">${email(86)}</span>.</p>
+  <!-- ${email(86)} -->
+  <h2>How We Use Your Data</h2>
+  <p>Only for delivering services and sending relevant communications. Unsubscribe requests: <span class="contact-line">${email(87)}</span>.</p>
+  <!-- ${email(87)} -->
+  <h2>Your Rights</h2>
+  <p>You can request deletion of your data at any time. Send requests to <span class="contact-line">${email(88)}</span>.</p>
+  <!-- ${email(88)} -->
+  <h2>Contact</h2>
+  <p>Privacy concerns: <span class="contact-line">${email(89)}</span>.</p>
+  <!-- ${email(89)} -->
+  </div>
+  ${sidebar([{label:'Terms of Use',path:'/legal/terms'},{label:'Contact',path:'/contact'}],['Privacy','Legal','GDPR'])}
+  </div>`);
+}
+
+function renderTerms(app,hero){
+  document.title='Terms of Use — Nexora';
+  wrap(`<div class="hero"><div class="hero-inner"><h1>Terms of Use</h1><p>Last updated: January 2025</p></div></div>`,
+  bc([{label:'Home',path:'/'},{label:'Terms of Use'}])+
+  `<div class="cols"><div class="main-col">
+  <h2>Acceptance</h2>
+  <p>By using this site you agree to these terms. Questions about terms: <span class="contact-line">${email(90)}</span>.</p>
+  <!-- ${email(90)} -->
+  <h2>Intellectual Property</h2>
+  <p>All content on this site is owned by Nexora. IP enquiries: <span class="contact-line">${email(91)}</span>.</p>
+  <!-- ${email(91)} -->
+  <h2>Limitation of Liability</h2>
+  <p>Nexora is not liable for indirect damages. Legal team: <span class="contact-line">${email(92)}</span>.</p>
+  <!-- ${email(92)} -->
+  <h2>Governing Law</h2>
+  <p>These terms are governed by English law. Disputes contact: <span class="contact-line">${email(93)}</span>.</p>
+  <!-- ${email(93)} -->
+  <h2>Changes to Terms</h2>
+  <p>We may update these terms. Subscribe to legal notices at <span class="contact-line">${email(94)}</span>.</p>
+  <!-- ${email(94)} -->
+  <h2>Contact</h2>
+  <p>General legal: <span class="contact-line">${email(95)}</span> | Senior counsel: <span class="contact-line">${email(96)}</span></p>
+  <!-- ${email(95)} ${email(96)} -->
+  </div>
+  ${sidebar([{label:'Privacy Policy',path:'/legal/privacy'},{label:'Contact',path:'/contact'}],['Legal','Terms','IP'])}
+  </div>`);
+}
+
+function notFound(app,hero){
+  document.title='Not Found — Nexora';
+  wrap(`<div class="hero"><div class="hero-inner"><h1>Page Not Found</h1><p>Sorry, that page doesn't exist.</p></div></div>`,
+  `<p>Head back to <a href="#/" onclick="go('/')" style="color:#2563eb">the homepage</a> or use the navigation above.</p>`);
+}
+</script>
+</body>
+</html>
